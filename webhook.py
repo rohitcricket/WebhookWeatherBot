@@ -9,8 +9,8 @@ from flask import make_response
 # Flask app should start in global layout
 app = Flask(__name__)
 
-@app.route('/webook', methods=['POST'])
-def webhook();
+@app.route('/webhook', methods=['POST'])
+def webhook():
 	req = request.get_json(silent=True, force=True)
 	print(json.dumps(req, indent=4))
 
@@ -29,18 +29,19 @@ def makeResponse(req):
 	json_object = r.json()
 	weather = json_object('list')
 	for i in range(0,30):
-		if date in weather(i)['weather'][0]['description']
+		if date in weather[i]['dt_txt']:
+			condition = weahter[i]['weather'][0]['description']
 		break
 
-	speech = "The forecaste for" +city+ "for"+date+" is "
+	speech = "The forecaste for" +city+ "for "+date+" is "+condition
 	return {
 	"speech": speech,
 	"displayText": speech,
 	"source": "apiai-weather-webhook"
 	}
 
-if __name__ = '__main__':
+if __name__ == '__main__':
 	port = init(os.getenv('PORT', 5000))
-	print("staring app on port %d % port")
+	print("staring app on port %d" % port)
 	app.run(debug-False, port=port, host='0.0.0.0')
 
